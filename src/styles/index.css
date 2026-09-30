@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 248 250 255;        /* #F8FAFF */
+  --surface: 255 255 255;
+  --fg: 15 23 42;
+  --muted: 100 116 139;
+  --line: 226 232 245;
+}
+:root[data-theme='dark'] {
+  --bg: 11 15 30;           /* #0B0F1E */
+  --surface: 18 23 43;      /* #12172B */
+  --fg: 232 236 248;
+  --muted: 148 163 190;
+  --line: 40 48 78;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-bg text-fg font-sans antialiased; transition: background-color .3s, color .3s; }
+  h1, h2, h3, h4 { @apply font-heading tracking-tight; }
+  :focus-visible { @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-bg; }
+  ::selection { background: #5B4BFF44; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
+}
+
+@layer components {
+  .btn { @apply relative inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-all duration-200 active:scale-[.97] disabled:opacity-60 disabled:pointer-events-none select-none; }
+  .btn-primary { @apply bg-brand-gradient text-white shadow-soft hover:-translate-y-0.5 hover:shadow-glow; }
+  .btn-accent { @apply bg-accent text-white shadow-soft hover:-translate-y-0.5 hover:bg-accent-600; }
+  .btn-outline { @apply border border-line bg-surface/60 text-fg backdrop-blur hover:-translate-y-0.5 hover:border-primary hover:text-primary; }
+  .btn-ghost { @apply text-fg hover:bg-primary/10 hover:text-primary; }
+  .btn-white { @apply bg-white text-primary-700 hover:-translate-y-0.5 hover:shadow-lift; }
+  .btn-lg { @apply px-7 py-4 text-base; }
+
+  .card { @apply rounded-xl3 border border-line bg-surface shadow-soft; }
+  .glass { @apply border border-white/40 bg-white/60 backdrop-blur-xl shadow-soft; }
+  [data-theme='dark'] .glass { @apply border-white/10 bg-white/5; }
+
+  .input { @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm text-fg placeholder:text-muted/70 transition focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15; }
+
+  .text-gradient { @apply bg-brand-gradient bg-clip-text text-transparent; }
+  .section { @apply py-20 md:py-28; }
+  .eyebrow { @apply mb-3 inline-block rounded-full bg-primary/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary; }
+  .h-section { @apply text-3xl font-extrabold md:text-5xl; }
+  .p-section { @apply mt-4 max-w-2xl text-base text-muted md:text-lg; }
+}
+
+.skeleton { position: relative; overflow: hidden; @apply rounded-xl bg-line/60; }
+.skeleton::after { content: ''; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgb(255 255 255 / .35), transparent); animation: shimmer 1.4s infinite; }
+
+.grid-mask { background-image: linear-gradient(rgb(var(--line) / .6) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--line) / .6) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%); mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%); }
+
+/* chart tokens: brand indigo on light, a lighter step on dark so it keeps >=3:1 against the card */
+:root { --chart-1: 91 75 255; }
+:root[data-theme='dark'] { --chart-1: 132 120 255; }
+
+/* recharts: recessive grid/axes that follow the theme; chart series colour comes from currentColor */
+.recharts-cartesian-grid line { stroke: rgb(var(--line)); }
+.recharts-text, .recharts-cartesian-axis-tick-value { fill: rgb(var(--muted)); font-size: 12px; }
+.recharts-cartesian-axis-line, .recharts-cartesian-axis-tick-line { stroke: rgb(var(--line)); }
+.recharts-surface:focus, .recharts-wrapper:focus { outline: none; }
