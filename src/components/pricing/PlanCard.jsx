@@ -7,7 +7,7 @@ export default function PlanCard({ plan, kind }) {
   const to = kind === 'candidate' ? `/request-job?plan=${plan.id}#request-form` : `/hire?plan=${plan.id}#hire-form`
   return (
     <TiltCard max={3} className={`relative flex h-full flex-col rounded-xl3 p-7 ${plan.popular ? 'border-2 border-primary bg-surface shadow-lift' : 'card'}`}>
-      {plan.popular && <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-brand-gradient px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-glow">Most popular</span>}
+      {plan.popular && <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-brand-gradient-ui px-4 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-glow">Most popular</span>}
       <h3 className="text-xl font-extrabold">{plan.name}</h3>
       <p className="mt-1 text-sm text-muted">{plan.tagline}</p>
       <p className="mt-5 font-heading text-4xl font-extrabold">{plan.price ? formatINR(plan.price) : 'Custom'}</p>

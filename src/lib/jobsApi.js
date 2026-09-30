@@ -50,10 +50,16 @@ export function filterJobs(jobs, f) {
   return out.sort((a, b) => (f.sort === 'salary' ? b.salary_max - a.salary_max : a.posted_days_ago - b.posted_days_ago))
 }
 
-export async function subscribeNewsletter(email) {
+/** Job alerts / newsletter. Re-subscribing updates the role/location preferences. */
+export async function subscribeAlerts(email, role = '', location = '') {
   if (!supabase) return { ok: true }
-  const { error } = await supabase.from('newsletter_subscribers').insert({ email: email.toLowerCase() })
-  // 23505 = already subscribed → treat as success
-  if (error && error.code !== '23505') throw error
+  const { error } = await supabase.rpc('subscribe_alerts', { p_email: email.toLowerCase(), p_role: role || null, p_location: location || null })
+  if (!error) return { ok: true }
+  // migration 004 not applied yet → plain insert; 23505 = already subscribed, treat as success
+  if (error.code !== 'PGRST202' && error.code !== '42883') throw error
+  const { error: e2 } = await supabase.from('newsletter_subscribers').insert({ email: email.toLowerCase(), role_interest: role || null, location_interest: location || null })
+  if (e2 && e2.code !== '23505') throw e2
   return { ok: true }
 }
+
+export const subscribeNewsletter = (email) => subscribeAlerts(email)

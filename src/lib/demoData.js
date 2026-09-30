@@ -56,3 +56,15 @@ export const demoNotifications = [
 ]
 
 export const demoJobs = jobs.map((j) => ({ ...j, company_name: j.company, status: 'open', created_at: day(j.posted_days_ago) }))
+
+export const demoMessages = [
+  { id: id('g', 1), name: 'Riya Kapoor', email: 'riya@example.com', phone: '+919876500001', subject: 'I am a candidate', message: 'I applied for the Data Analyst role last week. Could you tell me the status?', created_at: day(0.5) },
+  { id: id('g', 2), name: 'Vikram Singh', email: 'vikram@nexa.example', phone: null, subject: 'I am an employer', message: 'We need to hire 6 delivery supervisors in Pune within 30 days. Which plan fits?', created_at: day(2) },
+  { id: id('g', 3), name: 'Neha Gupta', email: 'neha@example.com', phone: '+919876500003', subject: 'Payment or refund', message: 'My payment went through twice for request HN-JR-DEMO102. Please refund one.', created_at: day(4) },
+]
+
+export const demoSubscribers = [
+  { id: id('s', 1), email: 'arjun@example.com', role_interest: 'React Developer', location_interest: 'Bengaluru', created_at: day(1) },
+  { id: id('s', 2), email: 'pooja@example.com', role_interest: 'Relationship Manager', location_interest: 'Mumbai', created_at: day(3) },
+  { id: id('s', 3), email: 'sam@example.com', role_interest: null, location_interest: null, created_at: day(6) },
+]

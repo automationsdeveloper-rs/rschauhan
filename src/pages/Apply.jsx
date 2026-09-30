@@ -19,7 +19,7 @@ export default function Apply() {
     <div className="container max-w-3xl pb-20 pt-28 md:pt-32">
       <Link to={`/jobs/${job.id}`} className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-muted hover:text-primary"><ArrowLeft className="h-4 w-4" />Back to job</Link>
       <div className="card mb-6 flex flex-wrap items-center gap-4 p-5">
-        <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand-gradient font-heading text-lg font-extrabold text-white">{job.company[0]}</span>
+        <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand-gradient-ui font-heading text-lg font-extrabold text-white">{job.company[0]}</span>
         <div className="min-w-0 flex-1">
           <p className="text-xs font-semibold uppercase tracking-wider text-primary">You&apos;re applying for</p>
           <h1 className="text-xl font-extrabold">{job.title}</h1>

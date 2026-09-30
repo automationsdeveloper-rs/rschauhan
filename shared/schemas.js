@@ -102,3 +102,14 @@ export const hiringSteps = (n) => [
   Array.from({ length: n }, (_, i) => posFields.map((f) => `positions.${i}.${f}`)).flat(),
   Array.from({ length: n }, (_, i) => reqFields.map((f) => `positions.${i}.${f}`)).flat(),
 ]
+
+// ───────── Contact form ─────────
+export const CONTACT_SUBJECTS = ['General enquiry', 'I am a candidate', 'I am an employer', 'Payment or refund', 'Partnership', 'Other']
+export const contactSchema = z.object({
+  name: text('Name'),
+  email,
+  phone: z.string().trim().refine((v) => v === '' || /^[6-9]\d{9}$/.test(v), 'Enter a valid 10-digit mobile number').optional(),
+  subject: z.enum(CONTACT_SUBJECTS, { errorMap: () => ({ message: 'Choose a subject' }) }),
+  message: z.string().trim().min(10, 'Tell us a little more (at least 10 characters)').max(2000, 'Keep it under 2000 characters'),
+  website: z.string().max(0).optional(), // honeypot
+})

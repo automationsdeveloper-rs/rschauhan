@@ -64,7 +64,7 @@ export function SuccessScreen({ code, title, lead, timeline, dashboardTo, demo }
         <ol className="relative space-y-5 border-l-2 border-line pl-6">
           {timeline.map(([t, d], i) => (
             <motion.li key={t} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.12 }} className="relative">
-              <span className="absolute -left-[33px] grid h-5 w-5 place-items-center rounded-full bg-brand-gradient text-[10px] font-bold text-white">{i + 1}</span>
+              <span className="absolute -left-[33px] grid h-5 w-5 place-items-center rounded-full bg-brand-gradient-ui text-[10px] font-bold text-white">{i + 1}</span>
               <p className="font-semibold">{t}</p><p className="text-sm text-muted">{d}</p>
             </motion.li>
           ))}

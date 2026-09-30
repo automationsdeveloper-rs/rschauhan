@@ -58,7 +58,7 @@ export default function Pricing() {
         <div role="tablist" className="glass mx-auto mt-10 flex w-fit rounded-2xl p-1.5">
           {tabs.map(([id, label]) => (
             <button key={id} role="tab" aria-selected={tab === id} onClick={() => setTab(id)} className={`relative rounded-xl px-6 py-2.5 text-sm font-semibold transition-colors ${tab === id ? 'text-white' : 'text-muted hover:text-fg'}`}>
-              {tab === id && <motion.span layoutId="price-pill" className="absolute inset-0 rounded-xl bg-brand-gradient shadow-glow" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
+              {tab === id && <motion.span layoutId="price-pill" className="absolute inset-0 rounded-xl bg-brand-gradient-ui shadow-glow" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
               <span className="relative">{label}</span>
             </button>
           ))}

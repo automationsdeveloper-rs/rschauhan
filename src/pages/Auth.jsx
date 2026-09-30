@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -46,7 +46,7 @@ const emailField = z.string().trim().email('Enter a valid email address')
 const passField = z.string().min(8, 'Use at least 8 characters')
 
 export function Login() {
-  useSeo({ title: 'Login — HireNest' })
+  useSeo({ title: 'Login — HireNest', noindex: true })
   const auth = useAuth()
   const { toast } = useToast()
   const nav = useNavigate()
@@ -76,7 +76,7 @@ export function Login() {
 }
 
 export function Signup() {
-  useSeo({ title: 'Sign up — HireNest' })
+  useSeo({ title: 'Sign up — HireNest', noindex: true })
   const auth = useAuth()
   const { toast } = useToast()
   const [role, setRole] = useState('candidate')
@@ -162,15 +162,4 @@ export function ResetPassword() {
       </form>
     </Shell>
   )
-}
-
-/** Wrap dashboard routes: redirects to /login and enforces the role. */
-export function ProtectedRoute({ roles, children }) {
-  const { user, role, loading, enabled } = useAuth()
-  const loc = useLocation()
-  if (!enabled) return children // demo mode: let the placeholder dashboards render
-  if (loading || (user && !role)) return <div className="grid min-h-[60vh] place-items-center"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>
-  if (!user) return <Navigate to="/login" state={{ from: loc.pathname }} replace />
-  if (roles && !roles.includes(role)) return <Navigate to={dashboardPath(role)} replace />
-  return children
 }

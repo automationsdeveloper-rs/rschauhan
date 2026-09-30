@@ -14,7 +14,7 @@ export function DashShell({ title, subtitle, tabs, active, onChange, children, a
         <nav aria-label="Dashboard sections" className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 lg:sticky lg:top-24 lg:mx-0 lg:h-fit lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0">
           {tabs.map((t) => (
             <button key={t.id} onClick={() => onChange(t.id)} aria-current={active === t.id ? 'page' : undefined}
-              className={`flex shrink-0 items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition ${active === t.id ? 'bg-brand-gradient text-white shadow-glow' : 'text-muted hover:bg-primary/10 hover:text-primary'}`}>
+              className={`flex shrink-0 items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition ${active === t.id ? 'bg-brand-gradient-ui text-white shadow-glow' : 'text-muted hover:bg-primary/10 hover:text-primary'}`}>
               {t.icon && <t.icon className="h-4 w-4" />}{t.label}
               {t.badge > 0 && <span className={`ml-auto rounded-full px-2 py-0.5 text-[10px] font-bold ${active === t.id ? 'bg-white/25' : 'bg-accent text-white'}`}>{t.badge}</span>}
             </button>

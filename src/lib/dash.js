@@ -63,14 +63,19 @@ export async function notifyStatus(kind, id) {
   }).catch(() => {})
 }
 
-/** CSV with BOM (opens cleanly in Excel). Cells starting with = + - @ are neutralised against formula injection. */
-export function downloadCsv(filename, columns, rows) {
+/** CSV text. Cells starting with = + - @ are neutralised against spreadsheet formula injection. */
+export function toCsv(columns, rows) {
   const cell = (v) => {
     let s = Array.isArray(v) ? v.join('; ') : v == null ? '' : String(v)
     if (/^[=+\-@\t\r]/.test(s)) s = "'" + s
     return `"${s.replace(/"/g, '""')}"`
   }
-  const csv = [columns.map((c) => cell(c.header)).join(','), ...rows.map((r) => columns.map((c) => cell(c.value(r))).join(','))].join('\r\n')
+  return [columns.map((c) => cell(c.header)).join(','), ...rows.map((r) => columns.map((c) => cell(c.value(r))).join(','))].join('\r\n')
+}
+
+/** Downloads a CSV with a BOM so it opens cleanly in Excel. */
+export function downloadCsv(filename, columns, rows) {
+  const csv = toCsv(columns, rows)
   const url = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' }))
   const a = Object.assign(document.createElement('a'), { href: url, download: filename })
   a.click()

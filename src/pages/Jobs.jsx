@@ -5,9 +5,11 @@ import { ChevronLeft, ChevronRight, SlidersHorizontal, X } from 'lucide-react'
 import FilterPanel, { RANGE } from '../components/jobs/FilterPanel'
 import JobListCard, { JobCardSkeleton } from '../components/jobs/JobListCard'
 import EmptyState from '../components/jobs/EmptyState'
+import JobAlerts from '../components/jobs/JobAlerts'
 import { useJobs, useSavedJobs, useSeo } from '../lib/hooks'
 import { filterJobs } from '../lib/jobsApi'
 import { useToast } from '../context/ToastContext'
+import { useLang } from '../i18n'
 
 const PAGE_SIZE = 8
 const list = (v) => (v ? v.split(',').filter(Boolean) : [])
@@ -26,6 +28,7 @@ function parse(sp) {
 
 export default function Jobs() {
   useSeo({ title: 'Find Jobs — HireNest', description: 'Browse verified job openings across IT, sales, banking, healthcare and more. Apply in minutes.' })
+  const { d, t } = useLang()
   const [sp, setSp] = useSearchParams()
   const f = useMemo(() => parse(sp), [sp])
   const { jobs, loading, error } = useJobs()
@@ -57,36 +60,37 @@ export default function Jobs() {
   const pages = Math.max(1, Math.ceil(results.length / PAGE_SIZE))
   const page = Math.min(f.page, pages)
   const shown = results.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+  const goPage = (n) => { set({ page: n }); window.scrollTo({ top: 0, behavior: 'smooth' }) }
 
   const onSave = (id) => { toggle(id); toast(isSaved(id) ? 'Removed from saved jobs' : 'Job saved', 'success') }
 
   return (
     <div className="container pb-20 pt-28 md:pt-32">
       <header className="mb-8">
-        <span className="eyebrow">Find jobs</span>
-        <h1 className="text-3xl font-extrabold md:text-5xl">Explore open positions</h1>
-        <p className="mt-3 text-muted">{loading ? 'Loading jobs…' : `${results.length} job${results.length === 1 ? '' : 's'} match your search`}</p>
+        <span className="eyebrow">{d.jobs.eyebrow}</span>
+        <h1 className="text-3xl font-extrabold md:text-5xl">{d.jobs.title}</h1>
+        <p className="mt-3 text-muted" aria-live="polite">{loading ? d.jobs.loading : results.length === 1 ? d.jobs.one : t('jobs.many', { n: results.length })}</p>
       </header>
 
       <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
         {/* desktop sidebar */}
-        <aside className="card sticky top-24 hidden h-fit max-h-[calc(100vh-7rem)] overflow-y-auto p-5 lg:block"><FilterPanel f={f} set={set} reset={reset} dirty={dirty} /></aside>
+        <aside className="card sticky top-24 hidden h-fit max-h-[calc(100vh-7rem)] overflow-y-auto p-5 lg:block" aria-label={d.jobs.filters}><FilterPanel f={f} set={set} reset={reset} dirty={dirty} /></aside>
 
         <div>
           <div className="mb-5 flex items-center justify-between gap-3">
-            <button onClick={() => setDrawer(true)} className="btn btn-outline lg:hidden"><SlidersHorizontal className="h-4 w-4" />Filters{dirty && <span className="h-2 w-2 rounded-full bg-accent" />}</button>
-            <label className="ml-auto flex items-center gap-2 text-sm text-muted">Sort by
+            <button onClick={() => setDrawer(true)} className="btn btn-outline lg:hidden" aria-expanded={drawer}><SlidersHorizontal className="h-4 w-4" aria-hidden />{d.jobs.filters}{dirty && <span className="h-2 w-2 rounded-full bg-accent" aria-hidden />}</button>
+            <label className="ml-auto flex items-center gap-2 text-sm text-muted">{d.jobs.sortBy}
               <select value={f.sort} onChange={(e) => set({ sort: e.target.value })} className="input !w-auto !py-2">
-                <option value="latest">Latest</option>
-                <option value="salary">Salary: high to low</option>
+                <option value="latest">{d.jobs.latest}</option>
+                <option value="salary">{d.jobs.salary}</option>
               </select>
             </label>
           </div>
 
           {error ? (
-            <div className="card p-10 text-center"><p className="font-semibold">We couldn&apos;t load jobs.</p><p className="mt-1 text-sm text-muted">Please refresh the page or try again in a moment.</p></div>
+            <div className="card p-10 text-center" role="alert"><p className="font-semibold">{d.jobs.loadError}</p><p className="mt-1 text-sm text-muted">{d.jobs.loadErrorSub}</p></div>
           ) : loading ? (
-            <div className="grid gap-4">{Array.from({ length: 4 }, (_, i) => <JobCardSkeleton key={i} />)}</div>
+            <div className="grid gap-4" aria-busy="true">{Array.from({ length: 4 }, (_, i) => <JobCardSkeleton key={i} />)}</div>
           ) : results.length === 0 ? (
             <EmptyState onReset={reset} />
           ) : (
@@ -94,29 +98,31 @@ export default function Jobs() {
               <div className="grid gap-4"><AnimatePresence mode="popLayout">{shown.map((j) => <JobListCard key={j.id} job={j} saved={isSaved(j.id)} onToggleSave={onSave} />)}</AnimatePresence></div>
               {pages > 1 && (
                 <nav className="mt-10 flex items-center justify-center gap-2" aria-label="Pagination">
-                  <button disabled={page === 1} onClick={() => { set({ page: page - 1 }); window.scrollTo({ top: 0, behavior: 'smooth' }) }} aria-label="Previous page" className="grid h-10 w-10 place-items-center rounded-xl border border-line disabled:opacity-40 hover:border-primary"><ChevronLeft className="h-4 w-4" /></button>
+                  <button disabled={page === 1} onClick={() => goPage(page - 1)} aria-label="Previous page" className="grid h-10 w-10 place-items-center rounded-xl border border-line disabled:opacity-40 hover:border-primary"><ChevronLeft className="h-4 w-4" aria-hidden /></button>
                   {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
-                    <button key={n} onClick={() => { set({ page: n }); window.scrollTo({ top: 0, behavior: 'smooth' }) }} aria-current={n === page ? 'page' : undefined}
-                      className={`h-10 w-10 rounded-xl text-sm font-semibold transition ${n === page ? 'bg-brand-gradient text-white shadow-glow' : 'border border-line hover:border-primary hover:text-primary'}`}>{n}</button>
+                    <button key={n} onClick={() => goPage(n)} aria-current={n === page ? 'page' : undefined} aria-label={`Page ${n}`}
+                      className={`h-10 w-10 rounded-xl text-sm font-semibold transition ${n === page ? 'bg-brand-gradient-ui text-white shadow-glow' : 'border border-line hover:border-primary hover:text-primary'}`}>{n}</button>
                   ))}
-                  <button disabled={page === pages} onClick={() => { set({ page: page + 1 }); window.scrollTo({ top: 0, behavior: 'smooth' }) }} aria-label="Next page" className="grid h-10 w-10 place-items-center rounded-xl border border-line disabled:opacity-40 hover:border-primary"><ChevronRight className="h-4 w-4" /></button>
+                  <button disabled={page === pages} onClick={() => goPage(page + 1)} aria-label="Next page" className="grid h-10 w-10 place-items-center rounded-xl border border-line disabled:opacity-40 hover:border-primary"><ChevronRight className="h-4 w-4" aria-hidden /></button>
                 </nav>
               )}
-              <p className="mt-10 text-center text-sm text-muted">Can&apos;t see the right role? <Link to="/request-job" className="font-semibold text-primary hover:underline">Raise a Job Request</Link> and we&apos;ll find it for you.</p>
+              <p className="mt-10 text-center text-sm text-muted">{d.jobs.cantSee} <Link to="/request-job" className="font-semibold text-primary hover:underline">{d.jobs.raise}</Link> {d.jobs.weFind}</p>
             </>
           )}
         </div>
       </div>
+
+      <JobAlerts defaultRole={f.q} defaultLocation={f.location} />
 
       {/* mobile filter drawer */}
       <AnimatePresence>
         {drawer && (
           <div className="fixed inset-0 z-[60] lg:hidden">
             <div className="absolute inset-0 bg-black/50" onClick={() => setDrawer(false)} />
-            <div className="absolute inset-y-0 right-0 w-[88%] max-w-sm overflow-y-auto bg-bg p-5 shadow-2xl" role="dialog" aria-label="Filters">
-              <button onClick={() => setDrawer(false)} aria-label="Close filters" className="mb-2 ml-auto grid h-9 w-9 place-items-center rounded-lg border border-line"><X className="h-4 w-4" /></button>
+            <div className="absolute inset-y-0 right-0 w-[88%] max-w-sm overflow-y-auto bg-bg p-5 shadow-2xl" role="dialog" aria-modal="true" aria-label={d.jobs.filters}>
+              <button onClick={() => setDrawer(false)} aria-label={d.jobs.closeFilters} className="mb-2 ml-auto grid h-9 w-9 place-items-center rounded-lg border border-line"><X className="h-4 w-4" aria-hidden /></button>
               <FilterPanel f={f} set={set} reset={reset} dirty={dirty} />
-              <button onClick={() => setDrawer(false)} className="btn btn-primary sticky bottom-0 mt-6 w-full">Show {results.length} jobs</button>
+              <button onClick={() => setDrawer(false)} className="btn btn-primary sticky bottom-0 mt-6 w-full">{t('jobs.show', { n: results.length })}</button>
             </div>
           </div>
         )}

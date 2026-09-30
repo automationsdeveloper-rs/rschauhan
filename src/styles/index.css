@@ -6,15 +6,36 @@
   --bg: 248 250 255;        /* #F8FAFF */
   --surface: 255 255 255;
   --fg: 15 23 42;
-  --muted: 100 116 139;
+  --muted: 95 107 128;      /* #5F6B80: 5.15:1 on bg, 4.71:1 on the hero's tinted areas (#F0EEFF) */
   --line: 226 232 245;
+
+  /* text colours (WCAG AA >= 4.5:1 against the light surface) */
+  --t-primary: 91 75 255;   /* #5B4BFF 5.16:1 */
+  --t-secondary: 14 116 144;/* #0E7490 5.13:1 */
+  --t-accent: 194 65 12;    /* #C2410C 5.18:1 */
+  --t-success: 21 128 61;   /* #15803D 5.02:1 */
+  --t-danger: 220 38 38;    /* #DC2626 4.83:1 */
+
+  /* gradients that carry white text end on cyan-700 (white on it: 5.36:1) */
+  --grad-ui: linear-gradient(135deg, #5B4BFF 0%, #0E7490 100%);
+  --grad-text: linear-gradient(135deg, #5B4BFF 0%, #0E7490 100%);
+  --chart-1: 91 75 255;
 }
 :root[data-theme='dark'] {
   --bg: 11 15 30;           /* #0B0F1E */
   --surface: 18 23 43;      /* #12172B */
   --fg: 232 236 248;
-  --muted: 148 163 190;
+  --muted: 148 163 190;     /* 6.97:1 on card */
   --line: 40 48 78;
+
+  --t-primary: 132 120 255; /* #8478FF 5.17:1 */
+  --t-secondary: 34 211 238;/* #22D3EE 9.82:1 */
+  --t-accent: 255 154 112;  /* #FF9A70 8.54:1 */
+  --t-success: 74 222 128;  /* #4ADE80 10.2:1 */
+  --t-danger: 248 113 113;  /* #F87171 6.42:1 */
+
+  --grad-text: linear-gradient(135deg, #8478FF 0%, #22D3EE 100%);
+  --chart-1: 132 120 255;
   color-scheme: dark;
 }
 
@@ -32,8 +53,8 @@
 
 @layer components {
   .btn { @apply relative inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-all duration-200 active:scale-[.97] disabled:opacity-60 disabled:pointer-events-none select-none; }
-  .btn-primary { @apply bg-brand-gradient text-white shadow-soft hover:-translate-y-0.5 hover:shadow-glow; }
-  .btn-accent { @apply bg-accent text-white shadow-soft hover:-translate-y-0.5 hover:bg-accent-600; }
+  .btn-primary { @apply bg-brand-gradient-ui text-white shadow-soft hover:-translate-y-0.5 hover:shadow-glow; }
+  .btn-accent { @apply bg-accent-700 text-white shadow-soft hover:-translate-y-0.5 hover:bg-[#A3360A]; }
   .btn-outline { @apply border border-line bg-surface/60 text-fg backdrop-blur hover:-translate-y-0.5 hover:border-primary hover:text-primary; }
   .btn-ghost { @apply text-fg hover:bg-primary/10 hover:text-primary; }
   .btn-white { @apply bg-white text-primary-700 hover:-translate-y-0.5 hover:shadow-lift; }
@@ -45,11 +66,18 @@
 
   .input { @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm text-fg placeholder:text-muted/70 transition focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15; }
 
-  .text-gradient { @apply bg-brand-gradient bg-clip-text text-transparent; }
+  .text-gradient { background-image: var(--grad-text); @apply bg-clip-text text-transparent; }
   .section { @apply py-20 md:py-28; }
   .eyebrow { @apply mb-3 inline-block rounded-full bg-primary/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary; }
   .h-section { @apply text-3xl font-extrabold md:text-5xl; }
   .p-section { @apply mt-4 max-w-2xl text-base text-muted md:text-lg; }
+
+  /* long-form legal / about copy */
+  .prose-site h2 { @apply mt-10 text-xl font-extrabold md:text-2xl; }
+  .prose-site h3 { @apply mt-6 text-lg font-bold; }
+  .prose-site p, .prose-site li { @apply mt-3 leading-relaxed text-muted; }
+  .prose-site ul { @apply list-disc pl-6; }
+  .prose-site a { @apply font-semibold text-primary underline; }
 }
 
 .skeleton { position: relative; overflow: hidden; @apply rounded-xl bg-line/60; }
@@ -57,12 +85,13 @@
 
 .grid-mask { background-image: linear-gradient(rgb(var(--line) / .6) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--line) / .6) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%); mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%); }
 
-/* chart tokens: brand indigo on light, a lighter step on dark so it keeps >=3:1 against the card */
-:root { --chart-1: 91 75 255; }
-:root[data-theme='dark'] { --chart-1: 132 120 255; }
-
 /* recharts: recessive grid/axes that follow the theme; chart series colour comes from currentColor */
 .recharts-cartesian-grid line { stroke: rgb(var(--line)); }
 .recharts-text, .recharts-cartesian-axis-tick-value { fill: rgb(var(--muted)); font-size: 12px; }
 .recharts-cartesian-axis-line, .recharts-cartesian-axis-tick-line { stroke: rgb(var(--line)); }
 .recharts-surface:focus, .recharts-wrapper:focus { outline: none; }
+
+/* Windows High Contrast / forced colours: keep borders visible on cards and buttons */
+@media (forced-colors: active) {
+  .card, .btn, .input, .glass { border: 1px solid CanvasText; }
+}

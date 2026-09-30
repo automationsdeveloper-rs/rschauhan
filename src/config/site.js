@@ -1,4 +1,5 @@
-// Single source of truth for brand + content. Change the name here and the whole site updates.
+// Single source of truth for brand + structure. Change the name here and the whole site updates.
+// User-facing copy lives in src/i18n/en.js (and hi.js); this file keeps values, icons and links.
 export const site = {
   name: 'HireNest',
   tagline: "India's smartest way to get hired & hire.",
@@ -8,27 +9,31 @@ export const site = {
   whatsapp: '919876543210', // country code + number, no "+"
   address: 'WeWork Galaxy, Residency Road, Bengaluru, Karnataka 560025',
   hours: 'Mon–Sat, 9:30 AM – 7:00 PM IST',
+  founded: 2022,
   social: { linkedin: '#', instagram: '#', x: '#' },
 }
 
+// Labels come from i18n `nav.<key>`.
 export const nav = [
-  { label: 'Find Jobs', to: '/jobs' },
-  { label: 'For Employers', to: '/hire' },
-  { label: 'How It Works', to: '/#how-it-works' },
-  { label: 'Pricing', to: '/pricing' },
-  { label: 'About', to: '/about' },
-  { label: 'Contact', to: '/contact' },
+  { key: 'jobs', to: '/jobs' },
+  { key: 'employers', to: '/hire' },
+  { key: 'how', to: '/#how-it-works' },
+  { key: 'pricing', to: '/pricing' },
+  { key: 'about', to: '/about' },
+  { key: 'contact', to: '/contact' },
 ]
 
 export const partners = ['Infosys', 'Zomato', 'Razorpay', 'Freshworks', 'Paytm', 'Swiggy', 'Zoho', 'Cred', 'Delhivery', 'Meesho']
 
+// Labels: i18n `stats[i]`
 export const stats = [
-  { value: 5000, suffix: '+', label: 'Candidates Placed' },
-  { value: 200, suffix: '+', label: 'Hiring Partners' },
-  { value: 48, suffix: ' hrs', label: 'Avg. First Profile Delivery' },
-  { value: 95, suffix: '%', label: 'Client Satisfaction' },
+  { value: 5000, suffix: '+' },
+  { value: 200, suffix: '+' },
+  { value: 48, suffix: ' hrs' },
+  { value: 95, suffix: '%' },
 ]
 
+// `name` is the value stored on jobs and used by the /jobs filter (always English); display label: i18n `industries.names[i]`
 export const industries = [
   { name: 'IT & Software', icon: 'Code2' },
   { name: 'Sales & Marketing', icon: 'Megaphone' },
@@ -42,28 +47,14 @@ export const industries = [
   { name: 'Hospitality', icon: 'ConciergeBell' },
 ]
 
-export const steps = {
-  candidates: [
-    { title: 'Browse or request a job', text: 'Explore open roles — or tell us the job you want and we hunt for it.' },
-    { title: 'Upload your CV & details', text: 'A 2-minute form. Your CV is stored privately and securely.' },
-    { title: 'We shortlist & match you', text: 'Our recruiters match your profile to the right openings and employers.' },
-    { title: 'Interview & get hired', text: 'We coordinate interviews and support you until the offer letter.' },
-  ],
-  employers: [
-    { title: 'Submit your requirement', text: 'Position, budget, experience, skills — share what you need.' },
-    { title: 'We source & screen', text: 'Recruiters search, call and verify candidates against your brief.' },
-    { title: 'Receive shortlisted profiles', text: 'First verified profiles land in your dashboard within 48 hours.' },
-    { title: 'Interview & hire', text: 'Pick your favourites, schedule interviews, close the position.' },
-  ],
-}
-
+// Titles/text: i18n `why.tiles[i]`
 export const whyUs = [
-  { icon: 'Target', title: 'Custom Job Requests', text: "Can't find your job? We hunt it for you.", span: 'md:col-span-2' },
-  { icon: 'ShieldCheck', title: 'Verified Profiles', text: 'Every candidate is screened.' },
-  { icon: 'Zap', title: 'Fast Turnaround', text: 'First profiles within 48 hours.' },
-  { icon: 'BadgeIndianRupee', title: 'Transparent Pricing', text: 'No hidden charges.' },
-  { icon: 'UserCheck', title: 'Dedicated Recruiter', text: 'One point of contact.' },
-  { icon: 'Lock', title: 'Data Privacy', text: 'Your CV and details are secure.', span: 'md:col-span-2' },
+  { icon: 'Target', span: 'md:col-span-2' },
+  { icon: 'ShieldCheck' },
+  { icon: 'Zap' },
+  { icon: 'BadgeIndianRupee' },
+  { icon: 'UserCheck' },
+  { icon: 'Lock', span: 'md:col-span-2' },
 ]
 
 // Pricing lives in /shared/plans.js so the payment API and the UI can never disagree.

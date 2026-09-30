@@ -4,8 +4,9 @@ import { PartnerMarquee } from '../components/home/TrustAndStats'
 import { Reveal, Stagger, StaggerItem, TiltCard } from '../components/ui/Motion'
 import SectionHeading from '../components/ui/SectionHeading'
 import PlanCard from '../components/pricing/PlanCard'
-import { pricing, steps } from '../config/site'
+import { pricing } from '../config/site'
 import { useSeo } from '../lib/hooks'
+import { useLang } from '../i18n'
 
 const benefits = [
   { icon: Clock, title: '48-hour first profiles', text: 'Verified, interview-ready profiles land in your dashboard within two days.' },
@@ -18,6 +19,7 @@ const benefits = [
 
 export default function Hire() {
   useSeo({ title: 'Hire Talent — HireNest', description: 'Raise a hiring request and get verified, shortlisted profiles within 48 hours.' })
+  const { d } = useLang()
   return (
     <div className="pt-28 md:pt-36">
       <div className="container">
@@ -41,7 +43,7 @@ export default function Hire() {
         <div className="mt-20">
           <SectionHeading eyebrow="Process" title="From brief to hire in four steps" />
           <ol className="mt-10 grid gap-5 md:grid-cols-4">
-            {steps.employers.map((s, i) => (
+            {d.how.employers.map((s, i) => (
               <Reveal key={s.title} delay={i * 0.08} as="li">
                 <div className="card relative h-full p-6">
                   <span className="text-gradient font-heading text-5xl font-extrabold">{i + 1}</span>

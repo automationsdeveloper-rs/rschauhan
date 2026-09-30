@@ -24,6 +24,7 @@ export function CookieBanner() {
 
   const choose = (v) => {
     try { localStorage.setItem('cookie-consent', v) } catch { /* ignore */ }
+    window.dispatchEvent(new CustomEvent('cookie-consent', { detail: v })) // analytics listens for "accepted"
     setShow(false)
   }
 

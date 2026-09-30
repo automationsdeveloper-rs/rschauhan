@@ -48,7 +48,7 @@ const completion = (c) => {
 }
 
 export default function CandidateDashboard() {
-  useSeo({ title: 'Candidate Dashboard — HireNest' })
+  useSeo({ title: 'Candidate Dashboard — HireNest', noindex: true })
   const { user, profile } = useAuth()
   const [sp, setSp] = useSearchParams()
   const tab = sp.get('tab') || 'overview'
@@ -102,7 +102,7 @@ export default function CandidateDashboard() {
               <div className="grid gap-4 md:grid-cols-2">
                 {recommended.map(({ j, score }) => (
                   <Link key={j.id} to={`/jobs/${j.id}`} className="card flex items-center gap-4 p-4 transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-lift">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-gradient font-heading font-bold text-white">{j.company[0]}</span>
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-gradient-ui font-heading font-bold text-white">{j.company[0]}</span>
                     <div className="min-w-0 flex-1"><p className="truncate font-semibold">{j.title}</p><p className="truncate text-xs text-muted">{j.company} · {salaryLabel(j)}</p></div>
                     <span className="rounded-full bg-success/15 px-2.5 py-1 text-xs font-bold text-success" title="Skill match">{score}% match</span>
                   </Link>

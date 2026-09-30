@@ -27,7 +27,7 @@ export default function RequestJob() {
           {steps.map((s, i) => (
             <StaggerItem key={s.title}>
               <div className="card h-full p-6">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-gradient text-white shadow-glow"><s.icon className="h-6 w-6" /></span>
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-gradient-ui text-white shadow-glow"><s.icon className="h-6 w-6" /></span>
                 <p className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Step {i + 1}</p>
                 <h3 className="text-lg font-bold">{s.title}</h3>
                 <p className="mt-1 text-sm text-muted">{s.text}</p>
@@ -36,7 +36,7 @@ export default function RequestJob() {
           ))}
         </Stagger>
 
-        <Reveal className="mx-auto mt-12 max-w-3xl rounded-3xl bg-brand-gradient p-6 text-white shadow-glow md:p-8">
+        <Reveal className="mx-auto mt-12 max-w-3xl rounded-3xl bg-brand-gradient-ui p-6 text-white shadow-glow md:p-8">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div><p className="text-sm font-semibold uppercase tracking-wider text-white/80">Plans start at</p><p className="font-heading text-4xl font-extrabold">{formatINR(pricing.candidate[0].price)} <span className="text-base font-medium text-white/80">+ GST</span></p></div>
             <ul className="space-y-1 text-sm text-white/90">{pricing.candidate.map((p) => <li key={p.id}>• {p.name} — <b>{formatINR(p.price)}</b></li>)}</ul>

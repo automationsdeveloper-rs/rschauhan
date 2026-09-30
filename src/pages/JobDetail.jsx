@@ -82,7 +82,7 @@ export default function JobDetail() {
         <div className="space-y-6">
           <Reveal className="card p-6 md:p-8">
             <div className="flex items-start gap-4">
-              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-brand-gradient font-heading text-2xl font-extrabold text-white">{job.company[0]}</span>
+              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-brand-gradient-ui font-heading text-2xl font-extrabold text-white">{job.company[0]}</span>
               <div>
                 <h1 className="text-2xl font-extrabold md:text-4xl">{job.title}</h1>
                 <p className="mt-1 text-lg text-muted">{job.company}</p>

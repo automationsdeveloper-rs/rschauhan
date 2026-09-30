@@ -48,7 +48,7 @@ function printInvoice(pay, request, employer) {
 }
 
 export default function EmployerDashboard() {
-  useSeo({ title: 'Employer Dashboard — HireNest' })
+  useSeo({ title: 'Employer Dashboard — HireNest', noindex: true })
   const { user } = useAuth()
   const { toast } = useToast()
   const act = useAction()
