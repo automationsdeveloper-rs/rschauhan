@@ -11,13 +11,14 @@ import './styles/index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
       <LangProvider>
       <ThemeProvider>
         <ToastProvider>
           <AuthProvider>
             <App />
-            {!/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname) && <Analytics />}
+            {/* the Vercel Analytics script only exists on Vercel: skip it locally and on GitHub Pages */}
+            {!/^(localhost|127\.0\.0\.1)$|\.github\.io$/.test(window.location.hostname) && <Analytics />}
           </AuthProvider>
         </ToastProvider>
       </ThemeProvider>

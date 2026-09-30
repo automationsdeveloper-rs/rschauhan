@@ -15,6 +15,8 @@ const siteMeta = () => ({
 })
 
 export default defineConfig({
+  // '/' on Vercel or a custom domain; '/<repo>/' on GitHub Pages (set BASE_PATH in the Pages workflow)
+  base: process.env.BASE_PATH || '/',
   plugins: [react(), siteMeta()],
   build: {
     rollupOptions: {

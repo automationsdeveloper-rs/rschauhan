@@ -33,10 +33,10 @@ export function AuthProvider({ children }) {
     enabled: !!supabase,
     signIn: (email, password) => supabase.auth.signInWithPassword({ email, password }),
     signUp: ({ email, password, name, role }) =>
-      supabase.auth.signUp({ email, password, options: { data: { name, role }, emailRedirectTo: window.location.origin + '/login' } }),
+      supabase.auth.signUp({ email, password, options: { data: { name, role }, emailRedirectTo: appUrl('/login') } }),
     // Google users are created as candidates; employers should sign up with email.
-    signInWithGoogle: () => supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin + '/login' } }),
-    resetPassword: (email) => supabase.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + '/reset-password' }),
+    signInWithGoogle: () => supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: appUrl('/login') } }),
+    resetPassword: (email) => supabase.auth.resetPasswordForEmail(email, { redirectTo: appUrl('/reset-password') }),
     updatePassword: (password) => supabase.auth.updateUser({ password }),
     signOut: () => supabase.auth.signOut(),
   }
@@ -44,5 +44,8 @@ export function AuthProvider({ children }) {
 }
 
 export const useAuth = () => useContext(AuthContext)
+
+/** Absolute URL of an app route, including the base path when hosted under a sub-path (GitHub Pages). */
+const appUrl = (path) => window.location.origin + import.meta.env.BASE_URL.replace(/\/$/, '') + path
 
 export const dashboardPath = (role) => (role === 'admin' ? '/admin' : role === 'employer' ? '/dashboard/employer' : '/dashboard/candidate')
