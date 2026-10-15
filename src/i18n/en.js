@@ -1,7 +1,7 @@
 // English strings. Keys mirror hi.js; a missing Hindi key falls back to these.
 export default {
   nav: {
-    jobs: 'Find Jobs', employers: 'For Employers', how: 'How It Works', pricing: 'Pricing', about: 'About', contact: 'Contact',
+    services: 'HR Services', jobs: 'Find Jobs', employers: 'For Employers', how: 'How It Works', pricing: 'Pricing', about: 'About', contact: 'Contact',
     login: 'Login', start: 'Get Started', dashboard: 'Dashboard', logout: 'Log out', openMenu: 'Open menu', closeMenu: 'Close menu',
     toDark: 'Switch to dark mode', toLight: 'Switch to light mode', switchLang: 'हिंदी में देखें', langShort: 'हिं', skip: 'Skip to content',
   },
@@ -61,8 +61,8 @@ export default {
   faq: { eyebrow: 'FAQ', title: 'Questions? Answered.' },
   cta: { title: 'Ready to make your next big move?', text: 'Join thousands who found their fit — or their next great hire — with HireNest.', findJob: 'Find a Job', hire: 'Hire Talent' },
   footer: {
-    tagline: 'Two-sided recruitment made simple, fast and transparent.', quick: 'Quick Links', candidates: 'For Candidates', employers: 'For Employers',
-    links: { home: 'Home', jobs: 'Find Jobs', pricing: 'Pricing', about: 'About', contact: 'Contact', browse: 'Browse Jobs', request: 'Request a Job', candDash: 'Candidate Dashboard', login: 'Login / Sign up', raise: 'Raise Hiring Request', empPricing: 'Employer Pricing', empDash: 'Employer Dashboard', partner: 'Partner With Us' },
+    tagline: 'Comprehensive HR operations, statutory compliance, payroll and talent acquisition.', quick: 'Quick Links', services: 'HR Solutions', candidates: 'For Candidates', employers: 'For Employers',
+    links: { home: 'Home', jobs: 'Find Jobs', services: 'All Services', pricing: 'Pricing', about: 'About', contact: 'Contact', browse: 'Browse Jobs', request: 'Request a Job', candDash: 'Candidate Dashboard', login: 'Login / Sign up', raise: 'Raise Hiring Request', empPricing: 'Employer Pricing', empDash: 'Employer Dashboard', partner: 'Partner With Us', recruitment: 'Talent Acquisition', hrms: 'Cloud HRMS Tech', compliance: 'EPF & ESI Compliance', payroll: 'Managed Payroll', policy: 'HR Policies & SOPs', virtualHr: 'Virtual HR Outsourcing' },
     newsTitle: 'Get job alerts & hiring tips', newsText: 'One helpful email a week. Unsubscribe anytime.', emailLabel: 'Email address', subscribe: 'Subscribe', subscribed: 'Subscribed',
     rights: 'All rights reserved.', privacy: 'Privacy', terms: 'Terms', refund: 'Refund Policy',
   },

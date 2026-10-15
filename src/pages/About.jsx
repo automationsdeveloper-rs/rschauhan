@@ -27,11 +27,11 @@ const timeline = [
   { year: '2023', title: '500 placements', text: 'Expanded into sales, finance and healthcare hiring across five cities.' },
   { year: '2024', title: 'Employer dashboard', text: 'Launched self-serve hiring requests with verified profiles delivered online.' },
   { year: '2025', title: '5,000+ placements, 200+ partners', text: 'Crossed 5,000 candidates placed with a 95% client-satisfaction score.' },
-  { year: '2026', title: 'Job Request service', text: 'Flipped the model: candidates now tell us the job they want, and we hunt for it.' },
+  { year: '2026', title: 'Complete HR & Payroll Suite', text: 'Expanded beyond hiring: rolled out Cloud HRMS, managed payroll, EPF/ESI compliance, and Virtual HR desk for Indian MSMEs & enterprises.' },
 ]
 
 export default function About() {
-  useSeo({ title: `About — ${site.name}`, description: `${site.name} is a two-sided recruitment marketplace: free job applications, paid job-hunting for candidates, and verified profiles in 48 hours for employers.` })
+  useSeo({ title: `About — ${site.name}`, description: `${site.name} is India's unified workforce and HR solutions platform: free job applications, verified hiring in 48 hours, cloud HRMS, managed payroll, and 100% statutory compliance.` })
   const { d } = useLang()
 
   return (
@@ -39,17 +39,17 @@ export default function About() {
       <div className="container">
         <Reveal className="mx-auto max-w-3xl text-center">
           <span className="eyebrow">About {site.name}</span>
-          <h1 className="text-4xl font-extrabold md:text-6xl">Recruitment, <span className="text-gradient">rebuilt as a product.</span></h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted">We sit between people who want a better job and companies that need better people, and we make both sides faster, fairer and less painful.</p>
+          <h1 className="text-4xl font-extrabold md:text-6xl">People operations, <span className="text-gradient">rebuilt as a product.</span></h1>
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted">We combine fast talent acquisition, modern cloud HRMS, error-free payroll, and 100% statutory compliance into one cohesive ecosystem for Indian businesses.</p>
         </Reveal>
 
         {/* story + stats */}
         <div className="mt-20 grid items-center gap-10 lg:grid-cols-2">
           <Reveal className="prose-site">
             <h2 className="!mt-0">Our story</h2>
-            <p>HireNest began in {site.founded} as a two-person recruiting desk in Bengaluru. We kept hearing the same two complaints: candidates applied into a black hole and never heard back, and employers drowned in unscreened resumes.</p>
-            <p>So we built a marketplace that treats recruitment like software. Candidates apply for free or, when nothing fits, pay a small fee for a recruiter to hunt on their behalf. Employers post a requirement, pay a transparent fee and receive verified, interview-ready profiles inside two days — all tracked in a dashboard, not an inbox.</p>
-            <p>Today we place thousands of people a year across ten industries, and we are only getting started.</p>
+            <p>HireNest began in {site.founded} as a recruiting desk in Bengaluru. We kept hearing the same complaints: candidates applied into a black hole and never heard back, while growing businesses drowned in unscreened resumes and spent endless hours battling complex EPF/ESI filings and manual payroll spreadsheets.</p>
+            <p>So we built a unified platform that treats people operations like software. Candidates apply for free or request bespoke job-hunting. Employers post requirements, get verified profiles inside 48 hours, and access cloud HRMS, zero-error payroll, and audit-ready labor law compliance — all managed with radical transparency.</p>
+            <p>Today we support over 200 partner companies and place thousands of professionals every year across India, delivering peace of mind to business owners and dignity to job seekers.</p>
           </Reveal>
           <Stagger className="grid grid-cols-2 gap-4">
             {stats.map((s, i) => (

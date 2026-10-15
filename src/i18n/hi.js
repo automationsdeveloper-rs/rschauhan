@@ -2,7 +2,7 @@
 // form fields and dashboards) stays in English; this covers navigation, home page, jobs page and footer.
 export default {
   nav: {
-    jobs: 'नौकरियाँ खोजें', employers: 'नियोक्ताओं के लिए', how: 'यह कैसे काम करता है', pricing: 'प्राइसिंग', about: 'हमारे बारे में', contact: 'संपर्क',
+    services: 'एचआर सेवाएं', jobs: 'नौकरियाँ खोजें', employers: 'नियोक्ताओं के लिए', how: 'यह कैसे काम करता है', pricing: 'प्राइसिंग', about: 'हमारे बारे में', contact: 'संपर्क',
     login: 'लॉगिन', start: 'शुरू करें', dashboard: 'डैशबोर्ड', logout: 'लॉग आउट', openMenu: 'मेनू खोलें', closeMenu: 'मेनू बंद करें',
     toDark: 'डार्क मोड चालू करें', toLight: 'लाइट मोड चालू करें', switchLang: 'View in English', langShort: 'EN', skip: 'सीधे कंटेंट पर जाएँ',
   },
@@ -62,8 +62,8 @@ export default {
   faq: { eyebrow: 'FAQ', title: 'सवाल? जवाब यहाँ हैं।' },
   cta: { title: 'अपना अगला बड़ा कदम उठाने के लिए तैयार?', text: 'हज़ारों लोगों ने HireNest के साथ अपनी सही नौकरी — या अगली बेहतरीन हायर — पाई है।', findJob: 'नौकरी खोजें', hire: 'टैलेंट हायर करें' },
   footer: {
-    tagline: 'दोनों तरफ़ की रिक्रूटमेंट — आसान, तेज़ और पारदर्शी।', quick: 'क्विक लिंक', candidates: 'उम्मीदवारों के लिए', employers: 'नियोक्ताओं के लिए',
-    links: { home: 'होम', jobs: 'नौकरियाँ खोजें', pricing: 'प्राइसिंग', about: 'हमारे बारे में', contact: 'संपर्क', browse: 'नौकरियाँ देखें', request: 'जॉब रिक्वेस्ट करें', candDash: 'उम्मीदवार डैशबोर्ड', login: 'लॉगिन / साइन अप', raise: 'हायरिंग रिक्वेस्ट डालें', empPricing: 'नियोक्ता प्राइसिंग', empDash: 'नियोक्ता डैशबोर्ड', partner: 'हमारे साथ जुड़ें' },
+    tagline: 'व्यापक एचआर संचालन, वैधानिक अनुपालन, पेरोल और टैलेंट हायरिंग।', quick: 'क्विक लिंक', services: 'एचआर समाधान', candidates: 'उम्मीदवारों के लिए', employers: 'नियोक्ताओं के लिए',
+    links: { home: 'होम', jobs: 'नौकरियाँ खोजें', services: 'सभी सेवाएं', pricing: 'प्राइसिंग', about: 'हमारे बारे में', contact: 'संपर्क', browse: 'नौकरियाँ देखें', request: 'जॉब रिक्वेस्ट करें', candDash: 'उम्मीदवार डैशबोर्ड', login: 'लॉगिन / साइन अप', raise: 'हायरिंग रिक्वेस्ट डालें', empPricing: 'नियोक्ता प्राइसिंग', empDash: 'नियोक्ता डैशबोर्ड', partner: 'हमारे साथ जुड़ें', recruitment: 'टैलेंट अधिग्रहण', hrms: 'क्लाउड HRMS टेक', compliance: 'EPF व ESI अनुपालन', payroll: 'प्रबंधित पेरोल', policy: 'एचआर नीतियां व SOPs', virtualHr: 'वर्चुअल एचआर आउटसोर्सिंग' },
     newsTitle: 'जॉब अलर्ट और हायरिंग टिप्स पाएँ', newsText: 'हफ़्ते में एक उपयोगी ईमेल। कभी भी अनसब्सक्राइब करें।', emailLabel: 'ईमेल पता', subscribe: 'सब्सक्राइब करें', subscribed: 'सब्सक्राइब हो गया',
     rights: 'सर्वाधिकार सुरक्षित।', privacy: 'प्राइवेसी', terms: 'नियम', refund: 'रिफ़ंड नीति',
   },

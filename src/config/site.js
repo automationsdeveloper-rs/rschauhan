@@ -15,6 +15,7 @@ export const site = {
 
 // Labels come from i18n `nav.<key>`.
 export const nav = [
+  { key: 'services', to: '/services' },
   { key: 'jobs', to: '/jobs' },
   { key: 'employers', to: '/hire' },
   { key: 'how', to: '/#how-it-works' },

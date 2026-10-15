@@ -11,6 +11,7 @@ const JobDetail = lazy(() => import('./pages/JobDetail'))
 const Apply = lazy(() => import('./pages/Apply'))
 const RequestJob = lazy(() => import('./pages/RequestJob'))
 const Hire = lazy(() => import('./pages/Hire'))
+const Services = lazy(() => import('./pages/Services'))
 const Pricing = lazy(() => import('./pages/Pricing'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
@@ -49,6 +50,7 @@ export default function App() {
           <Route path="jobs/:id/apply" element={<Apply />} />
           <Route path="request-job" element={<RequestJob />} />
           <Route path="hire" element={<Hire />} />
+          <Route path="services" element={<Services />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />

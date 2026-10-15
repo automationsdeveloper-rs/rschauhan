@@ -4,6 +4,7 @@ import { PartnerMarquee } from '../components/home/TrustAndStats'
 import { Reveal, Stagger, StaggerItem, TiltCard } from '../components/ui/Motion'
 import SectionHeading from '../components/ui/SectionHeading'
 import PlanCard from '../components/pricing/PlanCard'
+import Button from '../components/ui/Button'
 import { pricing } from '../config/site'
 import { useSeo } from '../lib/hooks'
 import { useLang } from '../i18n'
@@ -58,6 +59,35 @@ export default function Hire() {
       <div className="mt-20"><PartnerMarquee /></div>
 
       <div className="container">
+        {/* Full Suite HR Operations Callout */}
+        <div className="mt-20 card overflow-hidden border border-primary/30 bg-gradient-to-r from-primary/5 via-surface to-secondary/5 p-8 md:p-12 shadow-soft">
+          <div className="grid items-center gap-8 lg:grid-cols-[1.4fr_1fr]">
+            <div>
+              <span className="eyebrow">Enterprise & MSME HR Suite</span>
+              <h2 className="text-2xl font-extrabold md:text-3xl text-fg">
+                Need more than hiring? Power your entire HR, Payroll & Compliance.
+              </h2>
+              <p className="mt-3 text-sm text-muted leading-relaxed">
+                Beyond delivering pre-vetted candidates within 48 hours, HireNest implements cutting-edge <strong>Cloud HRMS</strong>, executes <strong>zero-error managed payroll</strong>, and manages <strong>100% compliant EPF, ESIC, PT & POSH operations</strong> for companies across India.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="rounded-lg bg-surface border border-line px-3 py-1.5 text-xs font-semibold text-fg">✓ Cloud HRMS & Mobile Attendance</span>
+                <span className="rounded-lg bg-surface border border-line px-3 py-1.5 text-xs font-semibold text-fg">✓ 100% EPF & ESI Monthly Filings</span>
+                <span className="rounded-lg bg-surface border border-line px-3 py-1.5 text-xs font-semibold text-fg">✓ Managed Payroll & Form 16</span>
+                <span className="rounded-lg bg-surface border border-line px-3 py-1.5 text-xs font-semibold text-fg">✓ Virtual HR Department Desk</span>
+              </div>
+            </div>
+            <div className="flex flex-col items-start lg:items-end justify-center gap-3">
+              <Button to="/services" size="lg" arrow className="w-full sm:w-auto">
+                Explore Full HR Solutions
+              </Button>
+              <Button to="/contact?service=compliance" variant="outline" size="sm" className="w-full sm:w-auto">
+                Book Free Compliance Audit
+              </Button>
+            </div>
+          </div>
+        </div>
+
         <div className="mt-20">
           <SectionHeading eyebrow="Pricing" title="Choose how you want to hire" text="Prices exclude 18% GST. Success-based options available on request." />
           <div className="mt-12 grid gap-6 pt-3 md:grid-cols-3">{pricing.employer.map((p) => <PlanCard key={p.id} plan={p} kind="employer" />)}</div>

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
@@ -22,12 +23,31 @@ const cards = [
 
 export default function Contact() {
   useSeo({ title: `Contact — ${site.name}`, description: `Questions about jobs, hiring or payments? Email, call or WhatsApp the ${site.name} team.` })
+  const [sp] = useSearchParams()
+  const svc = sp.get('service')
+  const size = sp.get('size')
+  const modules = sp.get('modules')
+
+  let defaultSubject = 'General enquiry'
+  let defaultMessage = ''
+  if (svc === 'hrms') defaultSubject = 'HRMS Implementation & Tech'
+  else if (svc === 'compliance') defaultSubject = 'Payroll & EPF/ESI Compliance'
+  else if (svc === 'payroll') defaultSubject = 'Payroll & EPF/ESI Compliance'
+  else if (svc === 'outsourcing' || svc === 'complete') defaultSubject = 'Complete HR Solutions / Outsourcing'
+  else if (svc === 'audit') {
+    defaultSubject = 'Payroll & EPF/ESI Compliance'
+    defaultMessage = 'Hi, I would like to book a free 30-minute HR & Statutory Compliance audit for my company.'
+  } else if (svc === 'custom') {
+    defaultSubject = 'Complete HR Solutions / Outsourcing'
+    defaultMessage = `Hi, I would like to discuss HR infrastructure solutions for a team of ${size || 'our company'}. Modules required: ${modules || 'All'}.`
+  }
+
   const { toast } = useToast()
   const [captcha, setCaptcha] = useState(null)
   const [done, setDone] = useState(false)
   const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(contactSchema),
-    defaultValues: { name: '', email: '', phone: '', subject: '', message: '', website: '' },
+    defaultValues: { name: '', email: '', phone: '', subject: defaultSubject, message: defaultMessage, website: '' },
   })
 
   const onSubmit = async (v) => {

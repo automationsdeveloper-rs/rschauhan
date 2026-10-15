@@ -15,7 +15,8 @@ const Social = ({ href, label, children }) => (
 
 // [i18n key, path]
 const cols = [
-  { title: 'quick', links: [['home', '/'], ['jobs', '/jobs'], ['pricing', '/pricing'], ['about', '/about'], ['contact', '/contact']] },
+  { title: 'quick', links: [['home', '/'], ['jobs', '/jobs'], ['services', '/services'], ['pricing', '/pricing'], ['about', '/about'], ['contact', '/contact']] },
+  { title: 'services', links: [['recruitment', '/services#recruitment'], ['hrms', '/services#hrms'], ['compliance', '/services#compliance'], ['payroll', '/services#payroll'], ['policy', '/services#policy'], ['virtualHr', '/services#outsourcing']] },
   { title: 'candidates', links: [['browse', '/jobs'], ['request', '/request-job'], ['candDash', '/dashboard/candidate'], ['login', '/login']] },
   { title: 'employers', links: [['raise', '/hire'], ['empPricing', '/pricing?for=employer'], ['empDash', '/dashboard/employer'], ['partner', '/contact']] },
 ]
@@ -39,7 +40,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden bg-[#0B0F1E] pt-20 text-white/70">
       <div className="pointer-events-none absolute -top-40 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-primary/30 blur-[120px]" />
       <div className="container relative">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr_1fr]">
           <div>
             <Logo light />
             <p className="mt-4 max-w-xs text-sm leading-relaxed">{site.tagline} {d.footer.tagline}</p>

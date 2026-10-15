@@ -1,5 +1,6 @@
 import Hero from '../components/home/Hero'
 import { PartnerMarquee, StatsBar, TwoPaths } from '../components/home/TrustAndStats'
+import HRSolutionsOverview from '../components/home/HRSolutionsOverview'
 import FeaturedJobs from '../components/home/FeaturedJobs'
 import HowItWorks from '../components/home/HowItWorks'
 import { WhyChooseUs, Industries } from '../components/home/WhyAndIndustries'
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <PartnerMarquee />
       <StatsBar />
+      <HRSolutionsOverview />
       <TwoPaths />
       <FeaturedJobs />
       <HowItWorks />

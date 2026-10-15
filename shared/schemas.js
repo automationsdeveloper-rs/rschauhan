@@ -104,7 +104,18 @@ export const hiringSteps = (n) => [
 ]
 
 // ───────── Contact form ─────────
-export const CONTACT_SUBJECTS = ['General enquiry', 'I am a candidate', 'I am an employer', 'Payment or refund', 'Partnership', 'Other']
+export const CONTACT_SUBJECTS = [
+  'General enquiry',
+  'HRMS Implementation & Tech',
+  'Payroll & EPF/ESI Compliance',
+  'Complete HR Solutions / Outsourcing',
+  'Talent Acquisition & Staffing',
+  'I am a candidate',
+  'I am an employer',
+  'Payment or refund',
+  'Partnership',
+  'Other',
+]
 export const contactSchema = z.object({
   name: text('Name'),
   email,
